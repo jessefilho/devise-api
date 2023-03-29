@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    devise-api (0.0.0)
+    devise-api (0.1.1)
       devise (>= 4.7.2)
       dry-configurable (~> 1.0, >= 1.0.1)
       dry-initializer (>= 3.1.1)
@@ -244,6 +244,7 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     sqlite3 (1.6.0-arm64-darwin)
+    sqlite3 (1.6.0-x86_64-linux)
     thor (1.2.1)
     timeout (0.3.1)
     tzinfo (2.0.5)
@@ -259,6 +260,7 @@ GEM
 PLATFORMS
   arm64-darwin-21
   arm64-darwin-22
+  x86_64-linux
 
 DEPENDENCIES
   awesome_print
