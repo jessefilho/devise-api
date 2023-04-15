@@ -37,9 +37,10 @@ module Devise
 
         def default_body
           {
-            token: token.access_token,
+            access_token: token.access_token,
             refresh_token: Devise.api.config.refresh_token.enabled ? token.refresh_token : nil,
-            expires_in: token.expires_in,
+            access_expires_in: token.expires_in,
+            refresh_expires_in: Devise.api.config.refresh_token.enabled ? token.refresh_expires_in : nil,
             token_type: ::Devise.api.config.authorization.scheme,
             resource_owner: {
               id: resource_owner.id,

@@ -30,15 +30,16 @@ RSpec.describe Devise::Api::Responses::TokenResponse do
     end
     let(:token) do
       double('token', resource_owner: resource_owner, access_token: 'access_token', refresh_token: 'refresh_token',
-                      expires_in: 3600)
+        access_expires_in: 3600, refresh_expires_in: 604800)
     end
     let(:token_response) { described_class.new(nil, token: token, action: :sign_in) }
 
     it 'returns the correct body' do
       expect(token_response.body).to eq({
-                                          token: 'access_token',
+                                          access_token: 'access_token',
                                           refresh_token: 'refresh_token',
-                                          expires_in: 3600,
+                                          access_expires_in: 3600,
+                                          refresh_expires_in: 604800,
                                           token_type: 'Bearer',
                                           resource_owner: {
                                             id: 1,
@@ -68,15 +69,16 @@ RSpec.describe Devise::Api::Responses::TokenResponse do
     end
     let(:token) do
       double('token', resource_owner: resource_owner, access_token: 'access_token', refresh_token: 'refresh_token',
-                      expires_in: 3600)
+        expires_in: 3600,refresh_expires_in: 604800)
     end
     let(:token_response) { described_class.new(nil, token: token, action: :sign_up) }
 
     it 'returns the correct body' do
       expect(token_response.body).to eq({
-                                          token: 'access_token',
+                                          access_token: 'access_token',
                                           refresh_token: 'refresh_token',
-                                          expires_in: 3600,
+                                          access_expires_in: 3600,
+                                          refresh_expires_in: 604800,
                                           token_type: 'Bearer',
                                           resource_owner: {
                                             id: 1,
@@ -105,15 +107,16 @@ RSpec.describe Devise::Api::Responses::TokenResponse do
     end
     let(:token) do
       double('token', resource_owner: resource_owner, access_token: 'access_token', refresh_token: 'refresh_token',
-                      expires_in: 3600)
+                      expires_in: 3600, refresh_expires_in: 604800)
     end
     let(:token_response) { described_class.new(nil, token: token, action: :refresh) }
 
     it 'returns the correct body' do
       expect(token_response.body).to eq({
-                                          token: 'access_token',
+                                          access_token: 'access_token',
                                           refresh_token: 'refresh_token',
-                                          expires_in: 3600,
+                                          access_expires_in: 3600,
+                                          refresh_expires_in: 604800,
                                           token_type: 'Bearer',
                                           resource_owner: {
                                             id: 1,
@@ -139,7 +142,7 @@ RSpec.describe Devise::Api::Responses::TokenResponse do
     end
     let(:token) do
       double('token', resource_owner: resource_owner, access_token: 'access_token', refresh_token: 'refresh_token',
-                      expires_in: 3600)
+                      expires_in: 3600, refresh_expires_in: 604800)
     end
     let(:token_response) { described_class.new(nil, token: token, action: :revoke) }
 

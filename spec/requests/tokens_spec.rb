@@ -19,9 +19,10 @@ RSpec.describe Devise::Api::TokensController, type: :request do
       end
 
       it 'returns a token' do
-        expect(parsed_body.token).to be_present
+        expect(parsed_body.access_token).to be_present
         expect(parsed_body.refresh_token).to be_present
-        expect(parsed_body.expires_in).to eq(1.hour.to_i)
+        expect(parsed_body.access_expires_in).to eq(1.hour.to_i)
+        expect(parsed_body.refresh_expires_in).to eq(1.week.to_i)
         expect(parsed_body.token_type).to eq('Bearer')
         expect(parsed_body.resource_owner).to be_present
         expect(parsed_body.resource_owner.id).to eq(User.last.id)
@@ -37,9 +38,10 @@ RSpec.describe Devise::Api::TokensController, type: :request do
 
       it 'creates a token' do
         expect(Devise::Api::Token.count).to eq(1)
-        expect(Devise::Api::Token.last.access_token).to eq(parsed_body.token)
+        expect(Devise::Api::Token.last.access_token).to eq(parsed_body.access_token)
         expect(Devise::Api::Token.last.refresh_token).to eq(parsed_body.refresh_token)
         expect(Devise::Api::Token.last.expires_in).to eq 1.hour.to_i
+        expect(Devise::Api::Token.last.refresh_expires_in).to eq 1.week.to_i
         expect(Devise::Api::Token.last.resource_owner_id).to eq(User.last.id)
         expect(Devise::Api::Token.last.resource_owner_type).to eq('User')
       end
@@ -110,9 +112,10 @@ RSpec.describe Devise::Api::TokensController, type: :request do
       end
 
       it 'returns a token' do
-        expect(parsed_body.token).to be_present
+        expect(parsed_body.access_token).to be_present
         expect(parsed_body.refresh_token).to be_present
-        expect(parsed_body.expires_in).to eq(1.hour.to_i)
+        expect(parsed_body.access_expires_in).to eq(1.hour.to_i)
+        expect(parsed_body.refresh_expires_in).to eq(1.week.to_i)
         expect(parsed_body.token_type).to eq('Bearer')
         expect(parsed_body.resource_owner).to be_present
         expect(parsed_body.resource_owner.id).to eq(user.id)
@@ -425,9 +428,10 @@ RSpec.describe Devise::Api::TokensController, type: :request do
       end
 
       it 'returns the new token' do
-        expect(parsed_body.token).to be_present
+        expect(parsed_body.access_token).to be_present
         expect(parsed_body.refresh_token).to be_present
-        expect(parsed_body.expires_in).to eq(1.hour.to_i)
+        expect(parsed_body.access_expires_in).to eq(1.hour.to_i)
+        expect(parsed_body.refresh_expires_in).to eq(1.week.to_i)
         expect(parsed_body.token_type).to eq('Bearer')
         expect(parsed_body.resource_owner).to be_present
         expect(parsed_body.resource_owner.id).to eq(User.last.id)
@@ -462,9 +466,10 @@ RSpec.describe Devise::Api::TokensController, type: :request do
       end
 
       it 'returns the new token' do
-        expect(parsed_body.token).to be_present
+        expect(parsed_body.access_token).to be_present
         expect(parsed_body.refresh_token).to be_present
-        expect(parsed_body.expires_in).to eq(1.hour.to_i)
+        expect(parsed_body.access_expires_in).to eq(1.hour.to_i)
+        expect(parsed_body.refresh_expires_in).to eq(1.week.to_i)
         expect(parsed_body.token_type).to eq('Bearer')
         expect(parsed_body.resource_owner).to be_present
         expect(parsed_body.resource_owner.id).to eq(User.last.id)

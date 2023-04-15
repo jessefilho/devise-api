@@ -6,6 +6,7 @@ FactoryBot.define do
     access_token { SecureRandom.hex(32) }
     refresh_token { SecureRandom.hex(32) }
     expires_in { 1.hour.to_i }
+    refresh_expires_in { 1.week.to_i }
 
     trait :access_token_expired do
       created_at { 2.hours.ago }

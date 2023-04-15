@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 20_230_113_213_619) do
     t.string 'access_token', null: false
     t.string 'refresh_token'
     t.integer 'expires_in', null: false
+    t.integer 'refresh_expires_in', null: false
     t.datetime 'revoked_at'
     t.string 'previous_refresh_token'
     t.datetime 'created_at', null: false

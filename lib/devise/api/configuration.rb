@@ -16,8 +16,8 @@ module Devise
       setting :refresh_token, reader: true do
         setting :enabled, default: true, reader: true
         setting :expires_in, default: 1.week, reader: true
-        setting :generator, default: proc { |_resource_owner| ::Devise.friendly_token(60) }, reader: true
         setting :expires_in_infinite, default: proc { |_resource_owner| false }, reader: true
+        setting :generator, default: proc { |_resource_owner| ::Devise.friendly_token(60) }, reader: true
       end
 
       setting :authorization, reader: true do

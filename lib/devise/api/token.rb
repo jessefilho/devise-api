@@ -27,10 +27,14 @@ module Devise
                 presence: true,
                 uniqueness: true,
                 if: -> { Devise.api.config.refresh_token.enabled }
-      validates :expires_in,
+      validates :access_expires_in,
                 presence: true,
                 numericality: { greater_than: 0 },
                 unless: -> { Devise.api.config.access_token.expires_in_infinite.call(resource_owner) }
+      validates :refresh_expires_in,
+                presence: true,
+                numericality: { greater_than: 0 },
+                unless: -> { Devise.api.config.refresh_token.expires_in_infinite.call(resource_owner) }
 
       def revoked?
         revoked_at.present?
@@ -47,13 +51,13 @@ module Devise
       def expired?
         return false if Devise.api.config.access_token.expires_in_infinite.call(resource_owner)
 
-        !!(expires_in && Time.now.utc > expires_at)
+        !!(access_expires_in && Time.now.utc > expires_at)
       end
 
       def refresh_token_expired?
         return false unless Devise.api.config.refresh_token.expires_in_infinite.call(resource_owner)
 
-        Time.now.utc > refresh_token_expires_at
+        !!(refresh_expires_in && Time.now.utc > refresh_token_expires_at)
       end
 
       def self.generate_uniq_access_token(resource_owner)
@@ -77,11 +81,11 @@ module Devise
       private
 
       def expires_at
-        created_at + expires_in.seconds
+        created_at + access_expires_in.seconds
       end
 
       def refresh_token_expires_at
-        created_at + Devise.api.config.refresh_token.expires_in.seconds
+        created_at + refresh_expires_in.seconds
       end
     end
   end

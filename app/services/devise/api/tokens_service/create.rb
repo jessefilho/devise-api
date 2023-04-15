@@ -35,6 +35,7 @@ module Devise
             access_token: Devise.api.config.base_token_model.constantize.generate_uniq_access_token(resource_owner),
             refresh_token: Devise.api.config.base_token_model.constantize.generate_uniq_refresh_token(resource_owner),
             expires_in: Devise.api.config.access_token.expires_in,
+            refresh_expires_in: Devise.api.config.refresh_token.expires_in,
             revoked_at: nil,
             previous_refresh_token: previous_refresh_token
           }
